@@ -39,55 +39,74 @@ class AccountViewController: UIViewController , UINavigationControllerDelegate, 
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("productCell") as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("productCell") as UITableViewCell?
         
-        println(indexPath.item)
-        let view = cell.contentView.subviews[2] as UIView
+        print(indexPath.item)
+
+        let view = cell!.contentView.subviews[2] as UIView
         view.layer.cornerRadius = view.frame.size.height / 2
 
-        let labelName = cell.contentView.subviews[3] as UILabel
-        labelName.text = products[indexPath.item][0] as String
+        let labelName = cell!.contentView.subviews[3] as? UILabel
+        labelName!.text = products[indexPath.item][0] as? String
 
-        let labelPrice = cell.contentView.subviews[0] as UILabel
-        labelPrice.text = products[indexPath.item][1] as String
+        let labelPrice = cell!.contentView.subviews[0] as? UILabel
+        labelPrice!.text = products[indexPath.item][1] as? String
 
-        let labelDate = cell.contentView.subviews[1] as UILabel
-        labelDate.text = products[indexPath.item][2] as String
+        let labelDate = cell!.contentView.subviews[1] as? UILabel
+        labelDate!.text = products[indexPath.item][2] as? String
 
-        return cell
+        return cell!
     }
+
         
+
     override func didReceiveMemoryWarning() {
+
         super.didReceiveMemoryWarning()
+
         // Dispose of any resources that can be recreated.
+
     }
+
     
+
     @IBAction func buttonStart(sender: AnyObject) {
+
         imagePicker =  UIImagePickerController()
+
         imagePicker.delegate = self
+
         imagePicker.sourceType = .Camera
-        
+
         presentViewController(imagePicker, animated: true, completion: nil)
+
     }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
+
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
-        
+
         // load and resized image
-        let image = info[UIImagePickerControllerOriginalImage] as UIImage
-        
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+
         let resizeRate:CGFloat = 5.0
+
         let newSize = CGSizeMake(image.size.width / resizeRate, image.size.height / resizeRate)
+
         image.resize(newSize, completionHandler: { [weak self](resizedImage, data) -> () in
+
             let image = resizedImage
+
             self?.imageTemp = image
+
             // move to another view after resize
+
             self?.showProductView()
         })
     }
-    
+
     func showProductView() {
-        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProductAddViewController") as ProductAddViewController
+        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProductAddViewController") as! ProductAddViewController
 
         viewController.image = imageTemp
         viewController.masterView = self

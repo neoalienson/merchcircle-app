@@ -178,6 +178,7 @@
 		B5B4C1A41ABD5EFC00F1D683 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = instastore;
 				TargetAttributes = {

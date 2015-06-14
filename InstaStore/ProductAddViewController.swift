@@ -28,8 +28,6 @@ class ProductAddViewController: UIViewController , UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let parent = self.parentViewController
         
         imageProduct.image = image
         
@@ -75,7 +73,7 @@ class ProductAddViewController: UIViewController , UINavigationControllerDelegat
     }
 
     @IBAction func buttonSubmit(sender: AnyObject) {
-        let creditcard = textFieldCreditCard.text.stringByTrimmingCharactersInSet(.whitespaceCharacterSet())
+        let creditcard = textFieldCreditCard.text!.stringByTrimmingCharactersInSet(.whitespaceCharacterSet())
 
 
 // .stringByReplacingOccurrencesOfString("-", withString: "", options: .allZeros, range: NSMakeRange(0, ))
@@ -84,56 +82,82 @@ class ProductAddViewController: UIViewController , UINavigationControllerDelegat
         
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        let price = numberFormatter.numberFromString(textFieldPrice.text)
+        let price = numberFormatter.numberFromString(textFieldPrice.text!)
         if (price?.integerValue < 10) {
             showAlert("Input error", message: "Price should not be less than 10")
             return
         }
         
         let imagePng = UIImagePNGRepresentation(image)
-        let imageString = imagePng.base64EncodedStringWithOptions(.allZeros)
+        let imageString = imagePng!.base64EncodedStringWithOptions([])
+
         let now = NSDate()
+
         let formatter = NSDateFormatter()
+
         formatter.dateFormat = "yyyyMMddHHmmss"
+
         self.id = formatter.stringFromDate(now)
-        println(self.id)
-        
+
+        print(self.id)
+
         let json = String(format: "{\"id\": \"%@\",\"name\": \"%@\",\"description\": \"%@\",\"price\": %@,\"image\": \"%@\", \"creditCard\" : \"%@\"}",
-            self.id, textFieldName.text, textViewDescription.text, price!, imageString, creditcard)
-        
+            self.id, textFieldName.text!, textViewDescription.text, price!, imageString, creditcard)
+
         post("http://instastore.herokuapp.com/product", json: json)
+
+        let obj = [ textFieldName.text!, String(format:"$%@ HKD", price!), "March 22, 2015", false]
         
-        masterView.products.insertObject([ textFieldName.text, String(format:"$%@ HKD", price!), "March 22, 2015", false], atIndex: 0)
+        masterView.products.insertObject(obj, atIndex: 0)
+
         masterView.refresh()
+
     }
-    
+
     func maskCreditcard(no: String) -> String {
+
         let idx : String.Index = advance(no.endIndex, -4)
+
         let substring = no.substringFromIndex(idx)
+
         return String(format: "**** - **** - **** - %@", substring)
-        
     }
+
     
+
     func post(url : String, json : NSString) {
+
         let _url = NSURL(string: url)
-        var request = NSMutableURLRequest(URL: _url!)
+
+        let request = NSMutableURLRequest(URL: _url!)
+
         let session = NSURLSession.sharedSession()
+
         request.HTTPMethod = "POST"
-        
+
         request.HTTPBody = json.dataUsingEncoding(NSUTF8StringEncoding)
+
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
-            println("Response: \(response)")
-            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println("Body: \(strData)")
-            let httpResponse = response as NSHTTPURLResponse
+
+        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+
+            print("Response: \(response)")
+
+            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+
+            print("Body: \(strData)")
+
+            let httpResponse = response as! NSHTTPURLResponse
+
             if (httpResponse.statusCode == 200) {
+
                 dispatch_sync(dispatch_get_main_queue())
                 {
                     self.dismissViewControllerAnimated(false, completion: {()-> Void in
-                        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProductViewController") as ProductViewController
+
+                        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
 
                         viewController.id = self.id
                         viewController.image = self.imageProduct.image
@@ -141,9 +165,8 @@ class ProductAddViewController: UIViewController , UINavigationControllerDelegat
                         viewController.name = self.textFieldName.text
                         viewController.desc = self.textViewDescription.text
 
-                        let maskedCreditcard = self.maskCreditcard(self.textFieldCreditCard.text)
+                        let maskedCreditcard = self.maskCreditcard(self.textFieldCreditCard.text!)
                         viewController.maskedCreditcard = maskedCreditcard as String
-                        
                         self.masterView?.presentViewController(viewController, animated: true, completion: nil)
                     })
                 }
@@ -153,27 +176,34 @@ class ProductAddViewController: UIViewController , UINavigationControllerDelegat
                 self.showAlert("Server error", message: "Something went wrong. Please retry")
             }
         })
-        
-        task.resume()
+
+       task!.resume()
+
     }
 
     func showAlert(title: String, message : String) {
         let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+
         let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
 
         alert.addAction(defaultAction)
+
         self.presentViewController(alert, animated: true, completion: nil)
+
     }
+
 
     @IBAction func buttonCancel(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
+
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
-        
+
         // load and resized image
-        let image = info[UIImagePickerControllerOriginalImage] as UIImage
+
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         let resizeRate:CGFloat = 10.0
         

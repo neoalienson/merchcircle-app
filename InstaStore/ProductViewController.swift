@@ -62,20 +62,33 @@ class ProductViewController: UIViewController, UIImagePickerControllerDelegate {
         // twitter
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
             let twitterAction = UIAlertAction(title: "Twitter", style: .Default, handler: {(alert: UIAlertAction!) in
-                var tweetSheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+                let tweetSheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+
                 
+
                 tweetSheet.setInitialText(message)
+
                 tweetSheet.addImage(self.image)
+
                 self.presentViewController(tweetSheet, animated: true, completion: nil)
+
             })
+
             
+
             sheet.addAction(twitterAction)
+
         }
+
         
+
         // facebook
+
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
+
             let facebookAction = UIAlertAction(title: "Facebook", style: .Default, handler: {(alert: UIAlertAction!) in
-                var facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+
+                let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
                 
                 facebookSheet.setInitialText(message)
                 self.presentViewController(facebookSheet, animated: true, completion: nil)
