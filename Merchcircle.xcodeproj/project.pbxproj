@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B581BAA41ABDB5AA00E313B2 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B581BAA31ABDB5AA00E313B2 /* ProductViewController.swift */; };
 		B5B4C1B21ABD5EFC00F1D683 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B4C1B11ABD5EFC00F1D683 /* AppDelegate.swift */; };
-		B5B4C1B51ABD5EFC00F1D683 /* InstaStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5B4C1B31ABD5EFC00F1D683 /* InstaStore.xcdatamodeld */; };
 		B5B4C1B71ABD5EFC00F1D683 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B4C1B61ABD5EFC00F1D683 /* AccountViewController.swift */; };
 		B5B4C1BA1ABD5EFC00F1D683 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B4C1B81ABD5EFC00F1D683 /* Main.storyboard */; };
 		B5B4C1BC1ABD5EFC00F1D683 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B4C1BB1ABD5EFC00F1D683 /* Images.xcassets */; };
@@ -34,7 +33,6 @@
 		B5B4C1AC1ABD5EFC00F1D683 /* Merchcircle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Merchcircle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B4C1B01ABD5EFC00F1D683 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5B4C1B11ABD5EFC00F1D683 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5B4C1B41ABD5EFC00F1D683 /* InstaStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InstaStore.xcdatamodel; sourceTree = "<group>"; };
 		B5B4C1B61ABD5EFC00F1D683 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		B5B4C1B91ABD5EFC00F1D683 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5B4C1BB1ABD5EFC00F1D683 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 				B581BAA31ABDB5AA00E313B2 /* ProductViewController.swift */,
 				B5B4C1BB1ABD5EFC00F1D683 /* Images.xcassets */,
 				B5B4C1BD1ABD5EFC00F1D683 /* LaunchScreen.xib */,
-				B5B4C1B31ABD5EFC00F1D683 /* InstaStore.xcdatamodeld */,
 				B5B4C1AF1ABD5EFC00F1D683 /* Supporting Files */,
 			);
 			name = Merchcircle;
@@ -240,7 +237,6 @@
 				B5B4C1D71ABD910F00F1D683 /* UIImage.swift in Sources */,
 				B5B4C1B21ABD5EFC00F1D683 /* AppDelegate.swift in Sources */,
 				B5B4C1D51ABD650800F1D683 /* ProductAddViewController.swift in Sources */,
-				B5B4C1B51ABD5EFC00F1D683 /* InstaStore.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,19 +440,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		B5B4C1B31ABD5EFC00F1D683 /* InstaStore.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				B5B4C1B41ABD5EFC00F1D683 /* InstaStore.xcdatamodel */,
-			);
-			currentVersion = B5B4C1B41ABD5EFC00F1D683 /* InstaStore.xcdatamodel */;
-			path = InstaStore.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = B5B4C1A41ABD5EFC00F1D683 /* Project object */;
 }

@@ -177,7 +177,7 @@ class ProductAddViewController: UIViewController , UINavigationControllerDelegat
             }
         })
 
-       task!.resume()
+       task.resume()
 
     }
 
