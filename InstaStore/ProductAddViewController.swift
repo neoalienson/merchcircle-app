@@ -116,7 +116,7 @@ class ProductAddViewController: UIViewController , UINavigationControllerDelegat
 
     func maskCreditcard(no: String) -> String {
 
-        let idx : String.Index = advance(no.endIndex, -4)
+        let idx : String.Index = no.endIndex.advancedBy(-4)
 
         let substring = no.substringFromIndex(idx)
 
